@@ -18,13 +18,13 @@ const handleSubmit = async (e) => {
   <h1>Register</h1>
   <form @submit="handleSubmit">
     <label>Email</label>
-    <input v-model="email" type="email" />
+    <input class="bg-slate-300" v-model="email" type="email" />
 
     <label>Username</label>
-    <input v-model="username" type="text" />
+    <input class="bg-slate-300" v-model="username" type="text" />
 
     <label>Password</label>
-    <input v-model="password" type="password" />
+    <input class="bg-slate-300" v-model="password" type="password" />
 
     <button>Register</button>
   </form>

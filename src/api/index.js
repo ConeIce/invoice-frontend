@@ -12,16 +12,4 @@ const register = (email, username, password) =>
 
 const addCustomer = (customerDetails) => API.post("/customer", customerDetails);
 
-// const addCustomer = async (customerDetails) => {
-//   const jsonRes = await fetch(`${baseUrl}/customer`, {
-//     method: "POST",
-//     withCredentials: true,
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(customerDetails),
-//     credentials: "include",
-//   });
-
-//   return jsonRes.json();
-// };
-
 export { login, register, addCustomer };
