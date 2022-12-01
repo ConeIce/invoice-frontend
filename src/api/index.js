@@ -1,32 +1,27 @@
-const baseUrl = import.meta.env.VITE_BASE_URL;
+import axios from "axios";
 
-const login = async (username, password) => {
-  console.log("here");
-  const jsonRes = await fetch(`${baseUrl}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username,
-      password,
-    }),
-  });
+const API = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  withCredentials: true,
+});
 
-  return jsonRes.json();
-};
+const login = (username, password) =>
+  API.post("/auth/login", { username, password });
+const register = (email, username, password) =>
+  API.post("/auth/register", { email, username, password });
 
-const register = async (email, username, password) => {
-  console.log("here");
-  const jsonRes = await fetch(`${baseUrl}/auth/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      email,
-      username,
-      password,
-    }),
-  });
+const addCustomer = (customerDetails) => API.post("/customer", customerDetails);
 
-  return jsonRes.json();
-};
+// const addCustomer = async (customerDetails) => {
+//   const jsonRes = await fetch(`${baseUrl}/customer`, {
+//     method: "POST",
+//     withCredentials: true,
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(customerDetails),
+//     credentials: "include",
+//   });
 
-export { login, register };
+//   return jsonRes.json();
+// };
+
+export { login, register, addCustomer };
