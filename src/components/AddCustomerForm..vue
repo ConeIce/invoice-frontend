@@ -22,7 +22,7 @@ const handleSubmit = async (e) => {
 </script>
 
 <template>
-  <form @submit="handleSubmit">
+  <form @submit="handleSubmit" class="bg-slate-300 p-10">
     <label>Name</label>
     <input v-model="customerDetails.name" type="text" />
 
