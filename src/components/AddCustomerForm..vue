@@ -22,28 +22,81 @@ const handleSubmit = async (e) => {
 </script>
 
 <template>
-  <form @submit="handleSubmit" class="bg-slate-300 p-10">
-    <label>Name</label>
-    <input v-model="customerDetails.name" type="text" />
+  <div
+    class="p-10 absolute inset-x-80 rounded-md backdrop-blur-md bg-white/30 border-2 border-slate-100"
+  >
+    <h1 class="text-2xl mb-20">Add customer</h1>
+    <form class="grid grid-cols-2">
+      <div>
+        <label>Name</label>
+        <input
+          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          v-model="customerDetails.name"
+          type="text"
+        />
+      </div>
 
-    <label>Email</label>
-    <input v-model="customerDetails.email" type="email" />
+      <div>
+        <label>Email</label>
+        <input
+          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          v-model="customerDetails.email"
+          type="email"
+        />
+      </div>
 
-    <label>Phone</label>
-    <input v-model="customerDetails.phone" type="number" />
+      <div>
+        <label>Phone</label>
+        <input
+          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          v-model="customerDetails.phone"
+          type="number"
+        />
+      </div>
 
-    <label>City</label>
-    <input v-model="customerDetails.city" type="text" />
+      <div>
+        <label>City</label>
+        <input
+          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          v-model="customerDetails.city"
+          type="text"
+        />
+      </div>
 
-    <label>State</label>
-    <input v-model="customerDetails.state" type="text" />
+      <div>
+        <label>State</label>
+        <input
+          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          v-model="customerDetails.state"
+          type="text"
+        />
+      </div>
 
-    <label>Country</label>
-    <input v-model="customerDetails.country" type="text" />
+      <div>
+        <label>Country</label>
+        <input
+          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          v-model="customerDetails.country"
+          type="text"
+        />
+      </div>
 
-    <label>Company name</label>
-    <input v-model="customerDetails.companyName" type="text" />
+      <div>
+        <label>Company name</label>
+        <input
+          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          v-model="customerDetails.companyName"
+          type="text"
+        />
+      </div>
+    </form>
 
-    <button type="submit">Add customer</button>
-  </form>
+    <button
+      class="mt-4 bg-red-500 px-8 py-2 rounded-full text-white hover:-translate-y-px transition-all"
+      @click="handleSubmit"
+      type="submit"
+    >
+      Add customer
+    </button>
+  </div>
 </template>

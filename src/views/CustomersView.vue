@@ -7,7 +7,7 @@ const showCustomerForm = ref(false);
 </script>
 
 <template>
-  <div class="flex gap-x-20 px-20 py-5">
+  <div class="flex gap-x-20">
     <DashboardRoutes />
     <div class="container">
       <AddCustomerForm v-if="showCustomerForm"></AddCustomerForm>
