@@ -5,11 +5,15 @@ const API = axios.create({
   withCredentials: true,
 });
 
-const login = (username, password) =>
+export const login = (username, password) =>
   API.post("/auth/login", { username, password });
-const register = (email, username, password) =>
+export const register = (email, username, password) =>
   API.post("/auth/register", { email, username, password });
 
-const addCustomer = (customerDetails) => API.post("/customer", customerDetails);
+export const addCustomer = (customerDetails) =>
+  API.post("/customer", customerDetails);
+export const getCustomers = () => API.get("/customer");
 
-export { login, register, addCustomer };
+export const addInvoice = (invoiceDetails) =>
+  API.post("/invoice", invoiceDetails);
+export const getInvoices = () => API.get("/invoice");

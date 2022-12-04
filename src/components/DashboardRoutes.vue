@@ -25,7 +25,7 @@ import { RouterLink } from "vue-router";
   </nav>
 </template>
 
-<style>
+<style scoped>
 .router-link-active {
   background-color: rgb(224 242 254);
 }

@@ -2,6 +2,8 @@
 import { reactive } from "vue";
 import { addCustomer } from "../api/index.js";
 
+const emit = defineEmits(["showCustomerForm"]);
+
 const customerDetails = reactive({
   name: "",
   email: "",
@@ -14,9 +16,9 @@ const customerDetails = reactive({
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  console.log(customerDetails);
 
   const res = await addCustomer(customerDetails);
+  emit("showCustomerForm", false);
   console.log(res);
 };
 </script>
