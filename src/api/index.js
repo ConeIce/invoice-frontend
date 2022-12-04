@@ -13,6 +13,7 @@ export const register = (email, username, password) =>
 export const addCustomer = (customerDetails) =>
   API.post("/customer", customerDetails);
 export const getCustomers = () => API.get("/customer");
+export const getCustomer = (id) => API.get(`/customer/${id}`);
 
 export const addInvoice = (invoiceDetails) =>
   API.post("/invoice", invoiceDetails);

@@ -5,7 +5,7 @@ import DashboardRoutes from "../components/DashboardRoutes.vue";
 
 import html2pdf from "html2pdf.js";
 
-import { getInvoices } from "../api/index";
+import { getInvoices, getCustomer } from "../api/index";
 
 import generateInvoiceHTML from "./generateInvoiceHTML.js";
 
@@ -16,11 +16,17 @@ onMounted(async () => {
   invoices.value = res.data;
 });
 
-const handleGenerateClick = (invoice) => {
+const handleGenerateClick = async (invoice) => {
   const invoiceData = JSON.parse(JSON.stringify(invoice));
-  const HTML = generateInvoiceHTML(invoiceData);
+  const customer = await getCustomer(invoiceData.customerId);
+  console.log(customer);
 
-  html2pdf().from(HTML, "string").save();
+  const HTML = generateInvoiceHTML(invoiceData, customer.data);
+
+  html2pdf()
+    .set({ html2canvas: { scale: 2 } })
+    .from(HTML, "string")
+    .save();
 };
 
 const showInvoiceForm = ref(false);
