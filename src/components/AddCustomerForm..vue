@@ -25,7 +25,12 @@ const handleSubmit = async (e) => {
 
 <template>
   <div
-    class="p-10 absolute inset-x-80 rounded-md backdrop-blur-md bg-white/30 border-2 border-slate-100"
+    @click="emit('showCustomerForm', false)"
+    class="absolute inset-0 bg-white/30 backdrop-blur-md"
+  ></div>
+
+  <div
+    class="p-10 absolute inset-x-80 rounded-md bg-white border-2 border-slate-100"
   >
     <h1 class="text-2xl mb-20">Add customer</h1>
     <form class="grid grid-cols-2">

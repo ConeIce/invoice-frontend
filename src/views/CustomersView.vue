@@ -15,9 +15,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex gap-x-20">
+  <div class="flex">
     <DashboardRoutes />
-    <div class="container">
+    <div class="py-8 px-14">
       <AddCustomerForm
         v-if="showCustomerForm"
         @showCustomerForm="(msg) => (showCustomerForm = msg)"
