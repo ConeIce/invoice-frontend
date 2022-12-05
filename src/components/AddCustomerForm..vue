@@ -2,7 +2,7 @@
 import { reactive } from "vue";
 import { addCustomer } from "../api/index.js";
 
-const emit = defineEmits(["showCustomerForm"]);
+const emit = defineEmits(["showCustomerForm", "newCustomer"]);
 
 const customerDetails = reactive({
   name: "",
@@ -19,7 +19,7 @@ const handleSubmit = async (e) => {
 
   const res = await addCustomer(customerDetails);
   emit("showCustomerForm", false);
-  console.log(res);
+  emit("newCustomer", res.data);
 };
 </script>
 
