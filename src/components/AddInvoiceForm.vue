@@ -38,7 +38,7 @@ const handleSubmit = async (e) => {
 <template>
   <div
     @click="emit('showInvoiceForm', false)"
-    class="absolute inset-0 bg-white/30 backdrop-blur-md"
+    class="absolute inset-0 bg-white/30 backdrop-blur-lg"
   ></div>
 
   <div
@@ -48,7 +48,11 @@ const handleSubmit = async (e) => {
     <form class="grid grid-cols-2">
       <div>
         <label>Customer name:</label>
-        <select v-model="invoiceDetails.customerId" name="customers">
+        <select
+          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          v-model="invoiceDetails.customerId"
+          name="customers"
+        >
           <option
             v-for="customer in customers"
             :key="customer._id"

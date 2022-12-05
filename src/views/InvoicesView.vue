@@ -37,28 +37,25 @@ const showInvoiceForm = ref(false);
 
     <div class="py-8 px-14">
       <h1 class="text-2xl flex items-center gap-4 mb-10">
-        All invoices
+        Your invoices
         <button
           @click="showInvoiceForm = true"
-          class="bg-red-300 text-sm p-2 rounded-full"
+          class="bg-red-400 text-white text-sm py-2 px-4 rounded"
         >
           Add invoice
         </button>
       </h1>
-      <div class="grid grid-cols-3 gap-3">
+
+      <div class="flex gap-3 flex-wrap">
         <div
-          class="bg-red-100 p-5 rounded"
+          class="bg-red-50 rounded-md py-5 px-6 flex items-center border-r-2 border-white"
           v-for="invoice in invoices"
           :key="invoice"
         >
-          <h1 class="text-xl font-bold mb-3">{{ invoice.name }}</h1>
-          <p>{{ invoice.customerName }}</p>
+          <h1 class="mr-20">{{ invoice.name }}</h1>
 
-          <button
-            class="bg-blue-500 px-4 py-1 rounded-full"
-            @click="handleGenerateClick(invoice)"
-          >
-            generate invoice
+          <button class="rounded-full" @click="handleGenerateClick(invoice)">
+            <img class="w-8" src="../assets/icons/download.svg" alt="" />
           </button>
         </div>
       </div>

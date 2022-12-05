@@ -25,10 +25,10 @@ onMounted(async () => {
       ></AddCustomerForm>
 
       <h1 class="text-2xl flex items-center gap-4 mb-10">
-        All customers
+        Your customers
         <button
           @click="showCustomerForm = true"
-          class="bg-red-300 text-sm p-2 rounded-full"
+          class="bg-red-400 text-white text-sm py-2 px-4 rounded"
         >
           Add customer
         </button>
@@ -36,7 +36,7 @@ onMounted(async () => {
 
       <div class="customers grid grid-cols-3 gap-3">
         <RouterLink
-          class="bg-red-50 rounded py-3 px-6"
+          class="bg-red-50 rounded-md py-5 px-6 pr-52"
           to="/customer/"
           v-for="customer in customers"
           :key="customer._id"

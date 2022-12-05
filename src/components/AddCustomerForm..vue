@@ -17,6 +17,10 @@ const customerDetails = reactive({
 const handleSubmit = async (e) => {
   e.preventDefault();
 
+  for (const item in customerDetails) {
+    if (customerDetails[item] == "") return alert("Fill all fields");
+  }
+
   const res = await addCustomer(customerDetails);
   emit("showCustomerForm", false);
   emit("newCustomer", res.data);
