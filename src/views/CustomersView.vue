@@ -6,7 +6,7 @@ import DashboardRoutes from "../components/DashboardRoutes.vue";
 import { getCustomers } from "../api";
 const showCustomerForm = ref(false);
 
-const customers = ref(false);
+const customers = ref([]);
 
 onMounted(async () => {
   const res = await getCustomers();
@@ -21,6 +21,7 @@ onMounted(async () => {
       <AddCustomerForm
         v-if="showCustomerForm"
         @showCustomerForm="(msg) => (showCustomerForm = msg)"
+        @newCustomer="(newCustomer) => customers.push(newCustomer)"
       ></AddCustomerForm>
 
       <h1 class="text-2xl flex items-center gap-4 mb-10">

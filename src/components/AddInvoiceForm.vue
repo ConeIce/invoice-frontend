@@ -2,7 +2,7 @@
 import { ref, onMounted, reactive } from "vue";
 import { getCustomers, addInvoice } from "../api/index.js";
 
-const emit = defineEmits(["showInvoiceForm"]);
+const emit = defineEmits(["showInvoiceForm", "newInvoice"]);
 
 const invoiceDetails = reactive({
   customerId: "",
@@ -31,7 +31,7 @@ const handleSubmit = async (e) => {
 
   const res = await addInvoice(invoiceDetails);
   emit("showInvoiceForm", false);
-  console.log(res);
+  emit("newInvoice", res.data);
 };
 </script>
 
@@ -59,7 +59,7 @@ const handleSubmit = async (e) => {
         </select>
       </div>
       <div>
-        <label>Name</label>
+        <label>Invoice name</label>
         <input
           class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
           v-model="invoiceDetails.name"
@@ -67,7 +67,7 @@ const handleSubmit = async (e) => {
         />
       </div>
       <div>
-        <label>Date</label>
+        <label>Invoice date</label>
         <input
           class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
           v-model="invoiceDetails.date"
@@ -75,32 +75,32 @@ const handleSubmit = async (e) => {
         />
       </div>
 
-      <div class="items">
+      <div>
         <div v-for="item in invoiceDetails.items" :key="item">
           <p>{{ item.name }}</p>
           <p>{{ item.cost }}</p>
           <p>{{ item.quantity }}</p>
         </div>
         <div>
-          <label>name</label>
+          <label>Item name</label>
           <input
             v-model="currItem['name']"
             class="bg-slate-500 block"
             type="text"
           />
-          <label>cost</label>
+          <label>Item cost</label>
           <input
             v-model="currItem['cost']"
             class="bg-slate-500 block"
             type="number"
           />
-          <label>quantity</label>
+          <label>Item quantity</label>
           <input
             v-model="currItem['quantity']"
             class="bg-slate-500 block"
             type="number"
           />
-          <button @click="addItem">add teim</button>
+          <button @click="addItem">Add item</button>
         </div>
       </div>
     </form>

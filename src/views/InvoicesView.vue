@@ -46,11 +46,18 @@ const showInvoiceForm = ref(false);
         </button>
       </h1>
       <div class="grid grid-cols-3 gap-3">
-        <div class="bg-red-100" v-for="invoice in invoices" :key="invoice">
-          <p>{{ invoice.name }}</p>
+        <div
+          class="bg-red-100 p-5 rounded"
+          v-for="invoice in invoices"
+          :key="invoice"
+        >
+          <h1 class="text-xl font-bold mb-3">{{ invoice.name }}</h1>
           <p>{{ invoice.customerName }}</p>
 
-          <button class="bg-blue-500" @click="handleGenerateClick(invoice)">
+          <button
+            class="bg-blue-500 px-4 py-1 rounded-full"
+            @click="handleGenerateClick(invoice)"
+          >
             generate invoice
           </button>
         </div>
@@ -60,6 +67,7 @@ const showInvoiceForm = ref(false);
     <AddInvoiceForm
       v-if="showInvoiceForm"
       @showInvoiceForm="(msg) => (showInvoiceForm = msg)"
+      @newInvoice="(newInvoice) => invoices.push(newInvoice)"
     ></AddInvoiceForm>
   </div>
 </template>
