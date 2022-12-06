@@ -38,7 +38,7 @@ const handleSubmit = async (e) => {
 <template>
   <div
     @click="emit('showInvoiceForm', false)"
-    class="absolute inset-0 bg-white/30 backdrop-blur-lg"
+    class="absolute inset-0 bg-black/50"
   ></div>
 
   <div
@@ -110,7 +110,7 @@ const handleSubmit = async (e) => {
     </form>
 
     <button
-      class="mt-4 bg-red-500 px-8 py-2 rounded-full text-white hover:-translate-y-px transition-all"
+      class="mt-4 bg-sky-500 px-8 py-2 rounded-full text-white hover:-translate-y-px transition-all"
       @click="handleSubmit"
       type="submit"
     >

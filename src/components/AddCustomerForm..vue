@@ -30,18 +30,18 @@ const handleSubmit = async (e) => {
 <template>
   <div
     @click="emit('showCustomerForm', false)"
-    class="absolute inset-0 bg-white/30 backdrop-blur-md"
+    class="absolute inset-0 bg-black/50"
   ></div>
 
   <div
-    class="p-10 absolute inset-x-80 rounded-md bg-white border-2 border-slate-100"
+    class="px-16 py-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white border-2 border-slate-100"
   >
-    <h1 class="text-2xl mb-20">Add customer</h1>
-    <form class="grid grid-cols-2">
+    <h1 class="text-2xl mb-10">Add customer</h1>
+    <form class="grid grid-cols-2 gap-x-20">
       <div>
         <label>Name</label>
         <input
-          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
           v-model="customerDetails.name"
           type="text"
         />
@@ -50,7 +50,7 @@ const handleSubmit = async (e) => {
       <div>
         <label>Email</label>
         <input
-          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
           v-model="customerDetails.email"
           type="email"
         />
@@ -59,7 +59,7 @@ const handleSubmit = async (e) => {
       <div>
         <label>Phone</label>
         <input
-          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
           v-model="customerDetails.phone"
           type="number"
         />
@@ -68,7 +68,7 @@ const handleSubmit = async (e) => {
       <div>
         <label>City</label>
         <input
-          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
           v-model="customerDetails.city"
           type="text"
         />
@@ -77,7 +77,7 @@ const handleSubmit = async (e) => {
       <div>
         <label>State</label>
         <input
-          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
           v-model="customerDetails.state"
           type="text"
         />
@@ -86,7 +86,7 @@ const handleSubmit = async (e) => {
       <div>
         <label>Country</label>
         <input
-          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
           v-model="customerDetails.country"
           type="text"
         />
@@ -95,7 +95,7 @@ const handleSubmit = async (e) => {
       <div>
         <label>Company name</label>
         <input
-          class="block bg-slate-100 rounded-full px-5 py-2 mt-3 mb-6"
+          class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
           v-model="customerDetails.companyName"
           type="text"
         />
@@ -103,7 +103,7 @@ const handleSubmit = async (e) => {
     </form>
 
     <button
-      class="mt-4 bg-red-500 px-8 py-2 rounded-full text-white hover:-translate-y-px transition-all"
+      class="mt-4 bg-sky-600 px-8 py-2 rounded text-white hover:-translate-y-px transition-all"
       @click="handleSubmit"
       type="submit"
     >

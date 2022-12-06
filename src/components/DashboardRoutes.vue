@@ -3,21 +3,23 @@ import { RouterLink } from "vue-router";
 </script>
 
 <template>
-  <nav class="flex flex-col h-screen px-8 py-10 border-r-2">
+  <nav
+    class="flex flex-col h-screen px-5 py-10 border-r-2 bg-black/90 text-white"
+  >
     <RouterLink
-      class="flex items-center gap-4 px-6 text-sm hover:bg-red-100 transition-all w-60 py-2 rounded-full mb-2"
+      class="flex items-center gap-3 px-5 text-sm hover:bg-slate-500 transition-all w-56 py-2 rounded mb-2"
       to="/customer"
       ><img
-        class="w-6"
+        class="w-5"
         src="../assets/icons/customer.svg"
         alt=""
       />Customers</RouterLink
     >
     <RouterLink
-      class="flex items-center gap-4 px-6 text-sm hover:bg-red-100 transition-all w-60 py-2 rounded-full mb-2"
+      class="flex items-center gap-3 px-5 text-sm hover:bg-slate-500 transition-all w-56 py-2 rounded mb-2"
       to="/invoice"
       ><img
-        class="w-6"
+        class="w-5"
         src="../assets/icons/invoice.svg"
         alt=""
       />Invoices</RouterLink
@@ -27,11 +29,11 @@ import { RouterLink } from "vue-router";
 
 <style scoped>
 .router-link-active {
-  background-color: #ff5858;
+  background-color: #0077b6;
   color: #fff;
 }
 
-.router-link-active img {
+img {
   filter: invert(100%);
 }
 </style>

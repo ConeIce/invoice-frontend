@@ -17,7 +17,7 @@ onMounted(async () => {
 <template>
   <div class="flex">
     <DashboardRoutes />
-    <div class="py-8 px-14">
+    <div class="py-8 px-10 grow">
       <AddCustomerForm
         v-if="showCustomerForm"
         @showCustomerForm="(msg) => (showCustomerForm = msg)"
@@ -28,24 +28,30 @@ onMounted(async () => {
         Your customers
         <button
           @click="showCustomerForm = true"
-          class="bg-red-400 text-white text-sm py-2 px-4 rounded"
+          class="bg-sky-600 text-white text-sm py-2 px-4 rounded"
         >
-          Add customer
+          + New
         </button>
       </h1>
 
-      <div class="customers grid grid-cols-3 gap-3">
-        <RouterLink
-          class="bg-red-50 rounded-md py-5 px-6 pr-52"
-          to="/customer/"
-          v-for="customer in customers"
-          :key="customer._id"
-        >
-          <p class="text-xl font-bold mb-1">{{ customer.name }}</p>
-          <p class="mb-3">{{ customer.companyName }}</p>
-          <p class="text-slate-700">{{ customer.email }}</p>
-        </RouterLink>
+      <div class="border-b-2 p-3 flex text-sm font-semibold">
+        <p class="basis-1/4">Customer name</p>
+        <p class="basis-1/4">Company name</p>
+        <p class="basis-1/4">Email Id</p>
+        <p class="basis-1/4">Phone</p>
       </div>
+
+      <RouterLink
+        class="border-b-2 p-3 flex hover:bg-slate-50 text-sm"
+        to="/customer/"
+        v-for="customer in customers"
+        :key="customer._id"
+      >
+        <p class="basis-1/4 text-sky-500 font-semibold">{{ customer.name }}</p>
+        <p class="basis-1/4">{{ customer.companyName }}</p>
+        <p class="basis-1/4">{{ customer.email }}</p>
+        <p class="basis-1/4">{{ customer.phone }}</p>
+      </RouterLink>
     </div>
   </div>
 </template>
