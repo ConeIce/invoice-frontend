@@ -43,7 +43,7 @@ onMounted(async () => {
 
       <RouterLink
         class="border-b-2 p-3 flex hover:bg-slate-50 text-sm"
-        to="/customer/"
+        :to="'/customer/' + customer._id"
         v-for="customer in customers"
         :key="customer._id"
       >

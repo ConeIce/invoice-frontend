@@ -1,22 +1,22 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import DashboardRoutes from "../components/DashboardRoutes.vue";
+import { useRoute } from "vue-router";
 
-// import { getCustomer } from "../api";
+import { getCustomer } from "../api";
 
 const customer = ref(false);
 
-// onMounted(async () => {
-//   const res = await getCustomer();
-//   customer.value = res.data;
-// });
+onMounted(async () => {
+  const route = useRoute();
+  const res = await getCustomer(route.params.id);
+  customer.value = res.data;
+});
 </script>
 
 <template>
   <div class="flex gap-x-20">
     <DashboardRoutes />
-    <div class="container">
-      <div class="customers"></div>
-    </div>
+    <h1>{{ customer.name }}</h1>
   </div>
 </template>
