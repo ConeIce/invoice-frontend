@@ -18,3 +18,6 @@ export const getCustomer = (id) => API.get(`/customer/${id}`);
 export const addInvoice = (invoiceDetails) =>
   API.post("/invoice", invoiceDetails);
 export const getInvoices = () => API.get("/invoice");
+
+export const getCustomerInvoices = (customerId) =>
+  API.get(`/invoice?customerId=${customerId}`);

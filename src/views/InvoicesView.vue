@@ -8,6 +8,7 @@ import html2pdf from "html2pdf.js";
 import { getInvoices, getCustomer } from "../api/index";
 
 import generateInvoiceHTML from "./generateInvoiceHTML.js";
+import InvoiceList from "../components/InvoiceList.vue";
 
 const invoices = ref([]);
 
@@ -18,17 +19,17 @@ onMounted(async () => {
   console.log(res.data);
 });
 
-const handleGenerateClick = async (invoice) => {
-  const invoiceData = JSON.parse(JSON.stringify(invoice));
-  const customer = await getCustomer(invoiceData.customerId);
+// const handleGenerateClick = async (invoice) => {
+//   const invoiceData = JSON.parse(JSON.stringify(invoice));
+//   const customer = await getCustomer(invoiceData.customerId);
 
-  const HTML = generateInvoiceHTML(invoiceData, customer.data);
+//   const HTML = generateInvoiceHTML(invoiceData, customer.data);
 
-  html2pdf()
-    .set({ html2canvas: { scale: 2 } })
-    .from(HTML, "string")
-    .save();
-};
+//   html2pdf()
+//     .set({ html2canvas: { scale: 2 } })
+//     .from(HTML, "string")
+//     .save();
+// };
 
 const showInvoiceForm = ref(false);
 </script>
@@ -48,28 +49,7 @@ const showInvoiceForm = ref(false);
         </button>
       </h1>
 
-      <div class="border-b-2 p-3 flex text-sm font-semibold">
-        <p class="basis-1/3">Invoice name</p>
-        <p class="basis-1/3">Invoice date</p>
-        <p class="basis-1/3">Download</p>
-      </div>
-
-      <RouterLink
-        class="border-b-2 p-3 flex hover:bg-slate-50 text-sm"
-        to="/invoice/"
-        v-for="invoice in invoices"
-        :key="invoice._id"
-      >
-        <p class="basis-1/3">{{ invoice.name }}</p>
-        <p class="basis-1/3">{{ invoice.date.substring(0, 10) }}</p>
-        <p class="basis-1/3">
-          <img
-            class="w-8"
-            src="../assets/icons/download.svg"
-            @click="handleGenerateClick(invoice)"
-          />
-        </p>
-      </RouterLink>
+      <InvoiceList :invoices="invoices"></InvoiceList>
     </div>
 
     <AddInvoiceForm
