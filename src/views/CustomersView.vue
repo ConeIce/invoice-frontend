@@ -34,24 +34,28 @@ onMounted(async () => {
         </button>
       </h1>
 
-      <div class="border-b-2 p-3 flex text-sm font-semibold">
-        <p class="basis-1/4">Customer name</p>
-        <p class="basis-1/4">Company name</p>
-        <p class="basis-1/4">Email Id</p>
-        <p class="basis-1/4">Phone</p>
-      </div>
+      <div class="rounded-md border-2">
+        <div class="border-b-2 p-3 flex text-sm font-semibold bg-sky-50">
+          <p class="basis-1/4">Customer name</p>
+          <p class="basis-1/4">Company name</p>
+          <p class="basis-1/4">Email Id</p>
+          <p class="basis-1/4">Phone</p>
+        </div>
 
-      <RouterLink
-        class="border-b-2 p-3 flex hover:bg-slate-50 text-sm"
-        :to="'/customer/' + customer._id"
-        v-for="customer in customers"
-        :key="customer._id"
-      >
-        <p class="basis-1/4 text-sky-500 font-semibold">{{ customer.name }}</p>
-        <p class="basis-1/4">{{ customer.companyName }}</p>
-        <p class="basis-1/4">{{ customer.email }}</p>
-        <p class="basis-1/4">{{ customer.phone }}</p>
-      </RouterLink>
+        <RouterLink
+          class="border-b-2 p-3 flex hover:bg-slate-50 text-sm"
+          :to="'/customer/' + customer._id"
+          v-for="customer in customers"
+          :key="customer._id"
+        >
+          <p class="basis-1/4 text-sky-500 font-semibold">
+            {{ customer.name }}
+          </p>
+          <p class="basis-1/4">{{ customer.companyName }}</p>
+          <p class="basis-1/4">{{ customer.email }}</p>
+          <p class="basis-1/4">{{ customer.phone }}</p>
+        </RouterLink>
+      </div>
     </div>
   </div>
 </template>

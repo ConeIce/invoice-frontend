@@ -2,18 +2,11 @@
 import { reactive } from "vue";
 import { addCustomer } from "../api/index.js";
 
-const emit = defineEmits(["showCustomerForm", "newCustomer"]);
+const emit = defineEmits(["showCustomerForm", "editedCustomer"]);
 
-const customerDetails = reactive({
-  name: "",
-  email: "",
-  phone: "",
-  city: "",
-  state: "",
-  country: "",
-  companyName: "",
-});
+const props = defineProps(["customerDetails"]);
 
+const customerDetails = reactive(props.customerDetails);
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -23,7 +16,7 @@ const handleSubmit = async (e) => {
 
   const res = await addCustomer(customerDetails);
   emit("showCustomerForm", false);
-  emit("newCustomer", res.data);
+  emit("editedCustomer", res.data);
 };
 </script>
 
@@ -36,7 +29,7 @@ const handleSubmit = async (e) => {
   <div
     class="px-16 py-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white border-2 border-slate-100"
   >
-    <h1 class="text-2xl mb-10">Add customer</h1>
+    <h1 class="text-2xl mb-10">Edit customer</h1>
     <form class="grid grid-cols-2 gap-x-20 text-sm">
       <div>
         <label>Name</label>
@@ -116,7 +109,7 @@ const handleSubmit = async (e) => {
       @click="handleSubmit"
       type="submit"
     >
-      Add customer
+      Edit customer
     </button>
   </div>
 </template>
