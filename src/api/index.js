@@ -21,3 +21,10 @@ export const getInvoices = () => API.get("/invoice");
 
 export const getCustomerInvoices = (customerId) =>
   API.get(`/invoice?customerId=${customerId}`);
+
+export const editCustomer = (editedCustomer) =>
+  API.put("/customer", editedCustomer);
+
+export const editGSTIN = (GSTIN) => API.put("details/gst", GSTIN);
+
+export const getGSTIN = () => API.get("details/gst");

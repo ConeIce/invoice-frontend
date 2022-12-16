@@ -7,9 +7,9 @@ const props = defineProps(["invoices"]);
 <template>
   <div class="rounded-md border-2">
     <div class="border-b-2 p-3 flex text-sm font-semibold bg-sky-50">
+      <p class="basis-1/3">Customer name</p>
       <p class="basis-1/3">Invoice name</p>
       <p class="basis-1/3">Invoice date</p>
-      <p class="basis-1/3">Download</p>
     </div>
 
     <RouterLink
@@ -18,6 +18,7 @@ const props = defineProps(["invoices"]);
       v-for="invoice in props.invoices"
       :key="invoice._id"
     >
+      <p class="basis-1/3">Name</p>
       <p class="basis-1/3">{{ invoice.name }}</p>
       <p class="basis-1/3">{{ invoice.date.substring(0, 10) }}</p>
     </RouterLink>

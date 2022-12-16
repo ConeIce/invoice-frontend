@@ -10,18 +10,18 @@ import EditCustomerForm from "../components/EditCustomerForm.vue";
 const customer = ref(false);
 const invoices = ref(false);
 
+const route = useRoute();
 const showCustomerForm = ref(false);
 
-onMounted(async () => {
-  const route = useRoute();
+const fetchCustomer = async () => {
   const res = await getCustomer(route.params.id);
   customer.value = res.data;
+};
 
+onMounted(async () => {
+  fetchCustomer();
   const resInvoice = await getCustomerInvoices(route.params.id);
   invoices.value = resInvoice.data;
-
-  console.log(res.data);
-  console.log(resInvoice.data);
 });
 </script>
 
@@ -30,7 +30,7 @@ onMounted(async () => {
     v-if="showCustomerForm"
     :customerDetails="customer"
     @showCustomerForm="(msg) => (showCustomerForm = msg)"
-    @editedCustomer="(editedCustomer) => (customer = editedCustomer)"
+    @editedCustomer="() => fetchCustomer()"
   ></EditCustomerForm>
   <div class="flex">
     <DashboardRoutes />

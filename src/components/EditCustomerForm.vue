@@ -1,22 +1,18 @@
 <script setup>
-import { reactive } from "vue";
-import { addCustomer } from "../api/index.js";
+import { ref } from "vue";
+import { editCustomer } from "../api/index.js";
 
 const emit = defineEmits(["showCustomerForm", "editedCustomer"]);
 
 const props = defineProps(["customerDetails"]);
 
-const customerDetails = reactive(props.customerDetails);
+const editedCustomerDetails = ref({ ...props.customerDetails });
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  for (const item in customerDetails) {
-    if (customerDetails[item] == "") return alert("Fill all fields");
-  }
-
-  const res = await addCustomer(customerDetails);
+  const res = await editCustomer(editedCustomerDetails.value);
   emit("showCustomerForm", false);
-  emit("editedCustomer", res.data);
+  emit("editedCustomer");
 };
 </script>
 
@@ -35,7 +31,7 @@ const handleSubmit = async (e) => {
         <label>Name</label>
         <input
           class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
-          v-model="customerDetails.name"
+          v-model="editedCustomerDetails.name"
           type="text"
         />
       </div>
@@ -44,7 +40,7 @@ const handleSubmit = async (e) => {
         <label>Email</label>
         <input
           class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
-          v-model="customerDetails.email"
+          v-model="editedCustomerDetails.email"
           type="email"
         />
       </div>
@@ -53,7 +49,7 @@ const handleSubmit = async (e) => {
         <label>Phone</label>
         <input
           class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
-          v-model="customerDetails.phone"
+          v-model="editedCustomerDetails.phone"
           type="number"
         />
       </div>
@@ -62,7 +58,7 @@ const handleSubmit = async (e) => {
         <label>City</label>
         <input
           class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
-          v-model="customerDetails.city"
+          v-model="editedCustomerDetails.city"
           type="text"
         />
       </div>
@@ -71,7 +67,7 @@ const handleSubmit = async (e) => {
         <label>State</label>
         <input
           class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
-          v-model="customerDetails.state"
+          v-model="editedCustomerDetails.state"
           type="text"
         />
       </div>
@@ -80,7 +76,7 @@ const handleSubmit = async (e) => {
         <label>Country</label>
         <input
           class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
-          v-model="customerDetails.country"
+          v-model="editedCustomerDetails.country"
           type="text"
         />
       </div>
@@ -89,7 +85,7 @@ const handleSubmit = async (e) => {
         <label>Company name</label>
         <input
           class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
-          v-model="customerDetails.companyName"
+          v-model="editedCustomerDetails.companyName"
           type="text"
         />
       </div>
@@ -98,7 +94,7 @@ const handleSubmit = async (e) => {
         <label>GST IN</label>
         <input
           class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
-          v-model="customerDetails.GSTIN"
+          v-model="editedCustomerDetails.GSTIN"
           type="number"
         />
       </div>

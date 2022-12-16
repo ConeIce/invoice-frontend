@@ -25,6 +25,15 @@ import { RouterLink } from "vue-router";
         alt=""
       />Invoices</RouterLink
     >
+    <RouterLink
+      class="flex items-center gap-3 px-5 text-sm hover:bg-slate-500 transition-all w-56 py-2 rounded-md mb-2"
+      to="/settings"
+      ><img
+        class="w-5"
+        src="../assets/icons/invoice.svg"
+        alt=""
+      />Settings</RouterLink
+    >
   </nav>
 </template>
 
