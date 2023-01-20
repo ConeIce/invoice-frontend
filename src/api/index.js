@@ -5,19 +5,18 @@ const API = axios.create({
   withCredentials: true,
 });
 
+// Auth
 export const login = (username, password) =>
   API.post("/auth/login", { username, password });
 export const register = (email, username, password) =>
   API.post("/auth/register", { email, username, password });
 
+// Customer
 export const addCustomer = (customerDetails) =>
   API.post("/customer", customerDetails);
+
 export const getCustomers = () => API.get("/customer");
 export const getCustomer = (id) => API.get(`/customer/${id}`);
-
-export const addInvoice = (invoiceDetails) =>
-  API.post("/invoice", invoiceDetails);
-export const getInvoices = () => API.get("/invoice");
 
 export const getCustomerInvoices = (customerId) =>
   API.get(`/invoice?customerId=${customerId}`);
@@ -25,6 +24,22 @@ export const getCustomerInvoices = (customerId) =>
 export const editCustomer = (editedCustomer) =>
   API.put("/customer", editedCustomer);
 
-export const editGSTIN = (GSTIN) => API.put("details/gst", GSTIN);
+// Invoice
+export const addInvoice = (invoiceDetails) =>
+  API.post("/invoice", invoiceDetails);
 
-export const getGSTIN = () => API.get("details/gst");
+export const getInvoices = () => API.get("/invoice");
+
+export const downloadInvoice = (invoiceId) =>
+  API.get(`/invoice/${invoiceId}/download`, {
+    responseType: "arraybuffer",
+    headers: {
+      Accept: "application/pdf",
+    },
+  });
+
+// GST/Settings
+export const editCompanyDetails = (companyDetails) =>
+  API.put("details", companyDetails);
+
+export const getCompanyDetails = () => API.get("details");

@@ -1,18 +1,29 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import DashboardRoutes from "../components/DashboardRoutes.vue";
 
-import { editGSTIN, getGSTIN } from "../api/";
+import { editCompanyDetails, getCompanyDetails } from "../api/";
 
-const GSTIN = ref("");
+let companyDetails = reactive({
+  GSTIN: "",
+  accountName: "",
+  accountNumber: "",
+  branchName: "",
+});
 
 const handleClick = async () => {
-  const res = await editGSTIN({ GSTIN: GSTIN.value });
+  const res = await editCompanyDetails(companyDetails);
 };
 
 onMounted(async () => {
-  const res = await getGSTIN();
-  GSTIN.value = res.data.GSTIN;
+  const res = await getCompanyDetails();
+  companyDetails.GSTIN = res.data.GSTIN;
+  companyDetails.accountName = res.data.accountName;
+  companyDetails.accountNumber = res.data.accountNumber;
+  companyDetails.branchName = res.data.branchName;
+
+  console.log(res.data);
+  console.log(companyDetails);
 });
 </script>
 
@@ -23,7 +34,28 @@ onMounted(async () => {
       <h1 class="text-2xl mb-10">Settings</h1>
       <label>Company GSTIN</label>
       <input
-        v-model="GSTIN"
+        v-model="companyDetails.GSTIN"
+        type="text"
+        class="block bg-sky-50 rounded-md px-3 py-2 mt-2"
+      />
+
+      <h1 class="text-xl font-bold">Account details</h1>
+
+      <label>Account number</label>
+      <input
+        v-model="companyDetails.accountName"
+        type="text"
+        class="block bg-sky-50 rounded-md px-3 py-2 mt-2"
+      />
+      <label>Account name</label>
+      <input
+        v-model="companyDetails.accountNumber"
+        type="text"
+        class="block bg-sky-50 rounded-md px-3 py-2 mt-2"
+      />
+      <label>Branch name</label>
+      <input
+        v-model="companyDetails.branchName"
         type="text"
         class="block bg-sky-50 rounded-md px-3 py-2 mt-2"
       />

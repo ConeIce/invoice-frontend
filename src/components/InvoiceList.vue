@@ -14,7 +14,7 @@ const props = defineProps(["invoices"]);
 
     <RouterLink
       class="border-b-2 p-3 flex hover:bg-slate-50 text-sm"
-      to="/invoice/"
+      :to="'/invoice/' + invoice._id"
       v-for="invoice in props.invoices"
       :key="invoice._id"
     >
