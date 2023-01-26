@@ -5,6 +5,7 @@ import DashboardRoutes from "../components/DashboardRoutes.vue";
 import { editCompanyDetails, getCompanyDetails } from "../api/";
 
 let companyDetails = reactive({
+  name: "",
   GSTIN: "",
   accountName: "",
   accountNumber: "",
@@ -17,6 +18,7 @@ const handleClick = async () => {
 
 onMounted(async () => {
   const res = await getCompanyDetails();
+  companyDetails.name = res.data.name;
   companyDetails.GSTIN = res.data.GSTIN;
   companyDetails.accountName = res.data.accountName;
   companyDetails.accountNumber = res.data.accountNumber;
@@ -32,6 +34,12 @@ onMounted(async () => {
     <DashboardRoutes />
     <div class="py-8 px-12">
       <h1 class="text-2xl mb-10">Settings</h1>
+      <label>Company name</label>
+      <input
+        v-model="companyDetails.name"
+        type="text"
+        class="block bg-sky-50 rounded-md px-3 py-2 mt-2"
+      />
       <label>Company GSTIN</label>
       <input
         v-model="companyDetails.GSTIN"

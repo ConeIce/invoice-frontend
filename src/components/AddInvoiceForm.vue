@@ -17,7 +17,6 @@ const currItem = ref({});
 onMounted(async () => {
   const res = await getCustomers();
   customers.value = res.data;
-  console.log(customers);
 });
 
 const addItem = (e) => {
@@ -30,6 +29,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   const res = await addInvoice(invoiceDetails);
+  console.log(res.data);
   emit("showInvoiceForm", false);
   emit("newInvoice", res.data);
 };
