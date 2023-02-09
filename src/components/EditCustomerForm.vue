@@ -7,8 +7,37 @@ const emit = defineEmits(["showCustomerForm", "editedCustomer"]);
 const props = defineProps(["customerDetails"]);
 
 const editedCustomerDetails = ref({ ...props.customerDetails });
+
+console.log(props.customerDetails);
 const handleSubmit = async (e) => {
   e.preventDefault();
+
+  if (
+    !editedCustomerDetails.value.name ||
+    !editedCustomerDetails.value.email ||
+    !editedCustomerDetails.value.city ||
+    !editedCustomerDetails.value.state ||
+    !editedCustomerDetails.value.country ||
+    !editedCustomerDetails.value.companyName ||
+    !editedCustomerDetails.value.GSTIN ||
+    !editedCustomerDetails.value.phone
+  ) {
+    return alert("Fill all fields");
+  }
+
+  console.log(
+    editedCustomerDetails.value.phone,
+    isNaN(editedCustomerDetails.value.phone),
+    typeof editedCustomerDetails.value.phone
+  );
+
+  if (
+    isNaN(editedCustomerDetails.value.phone) ||
+    editedCustomerDetails.value.phone < 0
+  ) {
+    alert("Enter valid number");
+    return;
+  }
 
   const res = await editCustomer(editedCustomerDetails.value);
   emit("showCustomerForm", false);

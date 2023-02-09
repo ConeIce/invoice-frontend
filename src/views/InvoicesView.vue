@@ -1,13 +1,11 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import AddInvoiceForm from "../components/AddInvoiceForm.vue";
+import AddCustomerForm from "../components/AddCustomerForm..vue";
 import DashboardRoutes from "../components/DashboardRoutes.vue";
 
-import html2pdf from "html2pdf.js";
+import { getInvoices } from "../api/index";
 
-import { getInvoices, getCustomer } from "../api/index";
-
-import generateInvoiceHTML from "./generateInvoiceHTML.js";
 import InvoiceList from "../components/InvoiceList.vue";
 
 const invoices = ref([]);
@@ -19,19 +17,15 @@ onMounted(async () => {
   console.log(res.data);
 });
 
-// const handleGenerateClick = async (invoice) => {
-//   const invoiceData = JSON.parse(JSON.stringify(invoice));
-//   const customer = await getCustomer(invoiceData.customerId);
-
-//   const HTML = generateInvoiceHTML(invoiceData, customer.data);
-
-//   html2pdf()
-//     .set({ html2canvas: { scale: 2 } })
-//     .from(HTML, "string")
-//     .save();
-// };
-
 const showInvoiceForm = ref(false);
+const showCustomerForm = ref(false);
+
+const handleShowCustomerForm = (msg) => {
+  showCustomerForm.value = msg;
+  console.log(msg + "asd");
+
+  showInvoiceForm.value = true;
+};
 </script>
 
 <template>
@@ -52,9 +46,16 @@ const showInvoiceForm = ref(false);
       <InvoiceList :invoices="invoices"></InvoiceList>
     </div>
 
+    <AddCustomerForm
+      v-if="showCustomerForm"
+      @showCustomerForm="(msg) => handleShowCustomerForm(msg)"
+      @newCustomer="(newCustomer) => console.log(newCustomer)"
+    ></AddCustomerForm>
+
     <AddInvoiceForm
       :invoicesLen="invoices.length"
       v-if="showInvoiceForm"
+      @showCustomerForm="(msg) => (showCustomerForm = msg)"
       @showInvoiceForm="(msg) => (showInvoiceForm = msg)"
       @newInvoice="(newInvoice) => invoices.push(newInvoice)"
     ></AddInvoiceForm>

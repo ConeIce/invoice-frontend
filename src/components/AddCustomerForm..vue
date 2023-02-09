@@ -23,7 +23,9 @@ const handleSubmit = async (e) => {
     !customerDetails.city ||
     !customerDetails.state ||
     !customerDetails.country ||
-    !customerDetails.companyName
+    !customerDetails.companyName ||
+    !customerDetails.GSTIN ||
+    !customerDetails.phone
   ) {
     return alert("Fill all fields");
   }
@@ -34,12 +36,7 @@ const handleSubmit = async (e) => {
     typeof customerDetails.phone
   );
 
-  if (
-    isNaN(customerDetails.phone) ||
-    customerDetails.phone < 0 ||
-    isNaN(customerDetails.GSTIN) ||
-    customerDetails.GSTIN < 0
-  ) {
+  if (isNaN(customerDetails.phone) || customerDetails.phone < 0) {
     alert("Enter valid number");
     return;
   }

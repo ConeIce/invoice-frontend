@@ -1,15 +1,7 @@
 <script setup>
 import { RouterView } from "vue-router";
-
-import Modal from "./components/Modal.vue";
-import { storeToRefs } from "pinia";
-import { useModalStore } from "@/stores/modal";
-
-const store = useModalStore();
-const { showModal } = storeToRefs(store);
 </script>
 
 <template>
-  <Modal v-if="showModal" />
   <RouterView />
 </template>

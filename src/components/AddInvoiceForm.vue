@@ -3,9 +3,7 @@ import { ref, onMounted, reactive } from "vue";
 import { getCustomers, addInvoice } from "../api/index.js";
 
 const props = defineProps(["invoicesLen"]);
-const emit = defineEmits(["showInvoiceForm", "newInvoice"]);
-
-console.log(props.invoicesLen);
+const emit = defineEmits(["showCustomerForm", "showInvoiceForm", "newInvoice"]);
 
 let today = new Date();
 let dd = today.getDate();
@@ -31,7 +29,11 @@ const invoiceDetails = reactive({
 });
 
 const customers = ref(false);
-const currItem = ref({});
+const currItem = ref({
+  name: "",
+  cost: "",
+  quantity: "",
+});
 
 onMounted(async () => {
   const res = await getCustomers();
@@ -40,19 +42,32 @@ onMounted(async () => {
 
 const addItem = (e) => {
   e.preventDefault();
+  if (
+    !currItem.value.name ||
+    !currItem.value.cost ||
+    !currItem.value.quantity
+  ) {
+    alert("Fill all fields");
+    return;
+  }
+
+  if (
+    isNaN(currItem.value.cost) ||
+    isNaN(currItem.value.quantity) ||
+    currItem.value.quantity < 0 ||
+    currItem.value.cost < 0
+  ) {
+    alert("Enter valid numbers");
+    return;
+  }
+
   invoiceDetails.items.push(currItem.value);
   currItem.value = {};
 };
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  console.log(
-    !!invoiceDetails.customerId,
-    !!invoiceDetails.date,
-    !!invoiceDetails.items.length,
-    !!invoiceDetails.discount,
-    !!invoiceDetails.tax
-  );
+  console.log(invoiceDetails.items);
 
   if (
     !invoiceDetails.customerId ||
@@ -64,6 +79,8 @@ const handleSubmit = async (e) => {
   }
 
   if (
+    !invoiceDetails.discount ||
+    !invoiceDetails.tax ||
     isNaN(invoiceDetails.discount) ||
     isNaN(invoiceDetails.tax) ||
     invoiceDetails.discount < 0 ||
@@ -78,6 +95,11 @@ const handleSubmit = async (e) => {
   const res = await addInvoice(invoiceDetails);
   emit("showInvoiceForm", false);
   emit("newInvoice", res.data);
+};
+
+const handleOptionClick = () => {
+  emit("showInvoiceForm", false);
+  emit("showCustomerForm", true);
 };
 </script>
 
@@ -103,12 +125,16 @@ const handleSubmit = async (e) => {
             v-model="invoiceDetails.customerId"
             name="customers"
           >
+            <option value="" selected>Select an option</option>
             <option
               v-for="customer in customers"
               :key="customer._id"
               :value="customer._id"
             >
               {{ customer.name }}
+            </option>
+            <option class="bg-blue-600 text-white" @click="handleOptionClick">
+              + Add customer
             </option>
           </select>
         </div>
@@ -163,13 +189,13 @@ const handleSubmit = async (e) => {
         <input
           v-model="currItem['cost']"
           class="basis-1/3 bg-sky-50 rounded px-3 py-2 mr-3"
-          type="number"
+          type="text"
           placeholder="Item cost"
         />
         <input
           v-model="currItem['quantity']"
           class="basis-1/3 bg-sky-50 rounded px-3 py-2 mr-3"
-          type="number"
+          type="text"
           placeholder="Item quantity"
         />
         <button
