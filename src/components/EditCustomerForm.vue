@@ -101,7 +101,7 @@ const handleSubmit = async (e) => {
     </form>
 
     <button
-      class="mt-4 bg-sky-600 px-8 py-2 rounded text-white text-sm hover:-translate-y-px transition-all"
+      class="mt-4 bg-blue-600 px-8 py-2 rounded text-white text-sm hover:-translate-y-px transition-all"
       @click="handleSubmit"
       type="submit"
     >

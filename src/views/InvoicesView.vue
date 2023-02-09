@@ -43,7 +43,7 @@ const showInvoiceForm = ref(false);
         Your invoices
         <button
           @click="showInvoiceForm = true"
-          class="bg-sky-600 text-white text-sm py-2 px-4 rounded"
+          class="bg-blue-600 text-white text-sm py-2 px-4 rounded"
         >
           + New
         </button>
@@ -53,6 +53,7 @@ const showInvoiceForm = ref(false);
     </div>
 
     <AddInvoiceForm
+      :invoicesLen="invoices.length"
       v-if="showInvoiceForm"
       @showInvoiceForm="(msg) => (showInvoiceForm = msg)"
       @newInvoice="(newInvoice) => invoices.push(newInvoice)"

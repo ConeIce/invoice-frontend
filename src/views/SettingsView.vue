@@ -4,6 +4,11 @@ import DashboardRoutes from "../components/DashboardRoutes.vue";
 
 import { editCompanyDetails, getCompanyDetails } from "../api/";
 
+import { useModalStore } from "@/stores/modal";
+
+const store = useModalStore();
+const { toggleModal } = store;
+
 let companyDetails = reactive({
   name: "",
   GSTIN: "",
@@ -13,7 +18,29 @@ let companyDetails = reactive({
 });
 
 const handleClick = async () => {
-  const res = await editCompanyDetails(companyDetails);
+  if (
+    !companyDetails.name ||
+    !companyDetails.GSTIN ||
+    !companyDetails.accountName ||
+    !companyDetails.accountNumber ||
+    !companyDetails.branchName
+  ) {
+    alert("Enter a valid input");
+    return;
+  }
+
+  if (isNaN(companyDetails.accountNumber) || companyDetails.accountNumber < 0) {
+    alert("Enter a valid account number");
+    return;
+  }
+
+  try {
+    const res = await editCompanyDetails(companyDetails);
+    alert("Submitted");
+    toggleModal("Company details updated");
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 onMounted(async () => {
@@ -51,13 +78,13 @@ onMounted(async () => {
 
       <label>Account number</label>
       <input
-        v-model="companyDetails.accountName"
-        type="text"
+        v-model="companyDetails.accountNumber"
+        type="number"
         class="block bg-sky-50 rounded-md px-3 py-2 mt-2"
       />
       <label>Account name</label>
       <input
-        v-model="companyDetails.accountNumber"
+        v-model="companyDetails.accountName"
         type="text"
         class="block bg-sky-50 rounded-md px-3 py-2 mt-2"
       />
@@ -70,7 +97,7 @@ onMounted(async () => {
 
       <button
         @click="handleClick"
-        class="rounded-md bg-sky-600 text-white py-2 px-4 mt-5"
+        class="rounded-md bg-blue-600 text-white py-2 px-4 mt-5"
       >
         Submit
       </button>

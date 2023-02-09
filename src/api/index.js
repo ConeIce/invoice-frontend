@@ -31,9 +31,6 @@ export const addInvoice = (invoiceDetails) =>
 export const getInvoices = () => API.get("/invoice");
 export const getInvoice = (id) => API.get(`/invoice/${id}`);
 
-export const editDiscount = (id, discount) =>
-  API.put(`/invoice/${id}`, discount);
-
 export const downloadInvoice = (invoiceId) =>
   API.get(`/invoice/${invoiceId}/download`, {
     responseType: "arraybuffer",

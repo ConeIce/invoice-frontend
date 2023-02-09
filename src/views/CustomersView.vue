@@ -28,7 +28,7 @@ onMounted(async () => {
         Your customers
         <button
           @click="showCustomerForm = true"
-          class="bg-sky-600 text-white text-sm py-2 px-4 rounded"
+          class="bg-blue-600 text-white text-sm py-2 px-4 rounded"
         >
           + New
         </button>

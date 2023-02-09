@@ -7,7 +7,7 @@ const emit = defineEmits(["showCustomerForm", "newCustomer"]);
 const customerDetails = reactive({
   name: "",
   email: "",
-  phone: "",
+  phone: null,
   city: "",
   state: "",
   country: "",
@@ -17,8 +17,31 @@ const customerDetails = reactive({
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  for (const item in customerDetails) {
-    if (customerDetails[item] == "") return alert("Fill all fields");
+  if (
+    !customerDetails.name ||
+    !customerDetails.email ||
+    !customerDetails.city ||
+    !customerDetails.state ||
+    !customerDetails.country ||
+    !customerDetails.companyName
+  ) {
+    return alert("Fill all fields");
+  }
+
+  console.log(
+    customerDetails.phone,
+    isNaN(customerDetails.phone),
+    typeof customerDetails.phone
+  );
+
+  if (
+    isNaN(customerDetails.phone) ||
+    customerDetails.phone < 0 ||
+    isNaN(customerDetails.GSTIN) ||
+    customerDetails.GSTIN < 0
+  ) {
+    alert("Enter valid number");
+    return;
   }
 
   const res = await addCustomer(customerDetails);
@@ -61,7 +84,6 @@ const handleSubmit = async (e) => {
         <input
           class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
           v-model="customerDetails.phone"
-          type="number"
         />
       </div>
 
@@ -106,13 +128,13 @@ const handleSubmit = async (e) => {
         <input
           class="block bg-slate-100 rounded px-5 py-2 mt-3 mb-6"
           v-model="customerDetails.GSTIN"
-          type="number"
+          type="text"
         />
       </div>
     </form>
 
     <button
-      class="mt-4 bg-sky-600 px-8 py-2 rounded text-white text-sm hover:-translate-y-px transition-all"
+      class="mt-4 bg-blue-600 px-8 py-2 rounded text-white text-sm hover:-translate-y-px transition-all"
       @click="handleSubmit"
       type="submit"
     >
