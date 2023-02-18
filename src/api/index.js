@@ -44,3 +44,7 @@ export const editCompanyDetails = (companyDetails) =>
   API.put("details", companyDetails);
 
 export const getCompanyDetails = () => API.get("details");
+
+// Search
+export const searchCustomers = (searchTerm) =>
+  API.get(`customer/search/${searchTerm}`);

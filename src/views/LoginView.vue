@@ -15,12 +15,15 @@ const handleSubmit = async (e) => {
     return;
   }
 
-  const res = await login(username.value, password.value);
-  if (res.status == 200) {
-    router.push("/customer");
-  }
+  try {
+    const res = await login(username.value, password.value);
 
-  console.log(res);
+    console.log(res);
+    router.push("/customer");
+  } catch (err) {
+    console.log(err);
+    alert("Invalid username or password");
+  }
 };
 </script>
 

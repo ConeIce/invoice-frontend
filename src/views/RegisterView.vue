@@ -14,9 +14,15 @@ const handleSubmit = async (e) => {
     alert("Enter valid inputs");
     return;
   }
+  try {
+    const res = await register(email.value, username.value, password.value);
+    console.log(res);
+    alert("User created");
+  } catch (err) {
+    console.log(err);
 
-  const res = await register(email.value, username.value, password.value);
-  console.log(res);
+    alert("User not created");
+  }
 };
 </script>
 

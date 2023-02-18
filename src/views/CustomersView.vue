@@ -3,10 +3,33 @@ import { ref, onMounted } from "vue";
 import AddCustomerForm from "../components/AddCustomerForm..vue";
 import DashboardRoutes from "../components/DashboardRoutes.vue";
 
-import { getCustomers } from "../api";
+import { getCustomers, searchCustomers } from "../api";
 const showCustomerForm = ref(false);
 
 const customers = ref([]);
+const searchTerm = ref("");
+const showClearSearch = ref(false);
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!searchTerm.value) {
+    alert("Enter a search term");
+    return;
+  }
+
+  showClearSearch.value = true;
+  const res = await searchCustomers(searchTerm.value);
+  customers.value = res.data;
+};
+
+const handleClick = async () => {
+  const res = await getCustomers();
+  customers.value = res.data;
+
+  searchTerm.value = "";
+  showClearSearch.value = false;
+};
 
 onMounted(async () => {
   const res = await getCustomers();
@@ -28,9 +51,26 @@ onMounted(async () => {
         Your customers
         <button
           @click="showCustomerForm = true"
-          class="bg-blue-600 text-white text-sm py-2 px-4 rounded"
+          class="bg-blue-600 text-white text-sm py-2 px-4 rounded mr-10"
         >
           + New
+        </button>
+
+        <form @submit="handleSubmit">
+          <input
+            type="text"
+            placeholder="search here"
+            class="bg-gray-100 rounded-md px-4 py-2 text-sm"
+            v-model="searchTerm"
+          />
+        </form>
+
+        <button
+          v-if="showClearSearch"
+          class="text-blue text-sm underline pointer"
+          @click="handleClick"
+        >
+          Clear search
         </button>
       </h1>
 

@@ -1,3 +1,8 @@
-<script setup></script>
+<script setup>
+import PageHeader from "../components/PageHeader.vue";
+</script>
 
-<template></template>
+<template>
+  <PageHeader />
+  Home
+</template>
